@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: Space Management API
+  version: 1.0.0
+  description: API for managing spaces
+paths:
+  /spaces:
+    post:
+      summary: Add a new space
+      operationId: addSpace
+      requestBody:
+        description: Space object that needs to be added
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Space'
+      responses:
+        '201':
+          description: Space created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Space:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the space
+        name:
+          type: string
+          description: Name of the space
+        address:
+          type: string
+          description: Address of the space
+        dateTime:
+          type: string
+          format: date-time
+          description: Date and time of the space's availability
+        description:
+          type: string
+          description: Description of the space
+      required:
+        - id
+        - name
+        - address
